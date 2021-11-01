@@ -2,7 +2,7 @@ package com.rr.rrol.se.model.property;
 
 import com.rr.rrol.se.reader.BinaryReader;
 
-public abstract class Property {
+public abstract class Property<T> {
 
 	protected PropertyName propertyName;
 	protected PropertyType propertyType;
@@ -27,4 +27,6 @@ public abstract class Property {
 	public PropertyType getPropertyType() {
 		return propertyType;
 	}
+	
+	public abstract T getValue();
 }

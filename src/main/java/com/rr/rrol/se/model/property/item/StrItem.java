@@ -2,7 +2,7 @@ package com.rr.rrol.se.model.property.item;
 
 import com.rr.rrol.se.reader.BinaryReader;
 
-public class StrItem extends Item {
+public class StrItem extends Item<String> {
 
 	private String value; 
 	
@@ -11,6 +11,7 @@ public class StrItem extends Item {
 		value = reader.readString();
 	}
 
+	@Override
 	public String getValue() {
 		return value;
 	}

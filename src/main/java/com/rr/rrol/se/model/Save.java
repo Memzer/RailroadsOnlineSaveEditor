@@ -21,8 +21,10 @@ public class Save {
 	
 	private String saveGameType;
 	
+	@SuppressWarnings("rawtypes")
 	private List<Property> properties;
-	
+
+	@SuppressWarnings("rawtypes")
 	public Save(BinaryReader reader) throws Exception {
 		byte[] checkHeader = new byte[Save.header.length];
 		reader.get(checkHeader);
@@ -74,6 +76,7 @@ public class Save {
 		return saveGameType;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List<Property> getProperties() {
 		return properties;
 	}

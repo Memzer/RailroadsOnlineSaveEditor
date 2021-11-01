@@ -79,17 +79,17 @@ public class BinaryReader {
 	public ByteBuffer get(byte[] bytes) {
 		return bb.get(bytes);
 	}
-	public short readInt16() {
+	public Short readInt16() {
 		return (short)((bb.get() & 0xFF) | (bb.get() & 0xFF) << 8);
 	}
-	public int readInt32() {
+	public Integer readInt32() {
 		return (bb.get() & 0xFF) | (bb.get() & 0xFF) << 8 | (bb.get() & 0xFF) << 16 | (bb.get() & 0xFF) << 24;
 	}	
-	public long readInt64() {
+	public Long readInt64() {
 		return (bb.get() & 0xFFL) | (bb.get() & 0xFFL) << 8 | (bb.get() & 0xFFL) << 16 | (bb.get() & 0xFFL) << 24 |
 				(bb.get() & 0xFFL) << 32 | (bb.get() & 0xFFL) << 40 | (bb.get() & 0xFFL) << 48 | (bb.get() & 0xFFL) << 56;
 	}
-	public float readFloat() {
+	public Float readFloat() {
 		return Float.intBitsToFloat((bb.get() & 0xFF) ^ (bb.get() & 0xFF) << 8 ^ (bb.get() & 0xFF) << 16 ^ (bb.get() & 0xFF) << 24);
 	}
 	public String readString() {

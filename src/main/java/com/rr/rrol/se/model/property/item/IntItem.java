@@ -2,9 +2,9 @@ package com.rr.rrol.se.model.property.item;
 
 import com.rr.rrol.se.reader.BinaryReader;
 
-public class IntItem extends Item {
+public class IntItem extends Item<Integer> {
 
-	private int value; 
+	private Integer value; 
 	
 	public IntItem(BinaryReader reader, ItemType itemType, ItemName itemName) {
 		super(reader, itemType, itemName);
@@ -12,7 +12,8 @@ public class IntItem extends Item {
 		value = reader.readInt32();
 	}
 
-	public int getValue() {
+	@Override
+	public Integer getValue() {
 		return value;
 	}
 	

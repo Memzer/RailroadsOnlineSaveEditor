@@ -2,7 +2,7 @@ package com.rr.rrol.se.model.property.item;
 
 import com.rr.rrol.se.reader.BinaryReader;
 
-public class Item {
+public abstract class Item<T> {
 	
 	protected ItemType itemType;
 	protected ItemName itemName;
@@ -11,5 +11,7 @@ public class Item {
 		this.itemType = itemType;
 		this.itemName = itemName;
 	}
+	
+	public abstract T getValue();
 	
 }

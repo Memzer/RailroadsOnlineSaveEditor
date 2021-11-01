@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.rr.rrol.se.reader.BinaryReader;
 
-public class TextItem extends Item {
+public class TextItem extends Item<String> {
 
 	private String value; 
 	
@@ -15,7 +15,9 @@ public class TextItem extends Item {
 		byte opt = reader.get();
 		long flags = reader.readInt64();
 		if(opt == 1) {
+			@SuppressWarnings("unused")
 			byte[] b1 = reader.readBytes(5);
+			@SuppressWarnings("unused")
 			String type = reader.readString();
 			String separator = reader.readString();
 			int numRows = reader.readInt32();
@@ -48,6 +50,7 @@ public class TextItem extends Item {
 		}
 	}
 
+	@Override
 	public String getValue() {
 		return value;
 	}

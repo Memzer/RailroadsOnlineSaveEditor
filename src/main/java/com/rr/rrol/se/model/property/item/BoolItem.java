@@ -2,9 +2,9 @@ package com.rr.rrol.se.model.property.item;
 
 import com.rr.rrol.se.reader.BinaryReader;
 
-public class BoolItem extends Item {
+public class BoolItem extends Item<Boolean> {
 
-	private boolean value; 
+	private Boolean value; 
 	
 	public BoolItem(BinaryReader reader, ItemType itemType, ItemName itemName) {
 		super(reader, itemType, itemName);
@@ -15,6 +15,11 @@ public class BoolItem extends Item {
 		} else {
 			value = false;
 		}
+	}
+
+	@Override
+	public Boolean getValue() {
+		return value;
 	}
 	
 }
