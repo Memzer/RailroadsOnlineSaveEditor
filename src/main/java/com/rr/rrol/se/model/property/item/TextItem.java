@@ -24,7 +24,7 @@ public class TextItem extends Item<String> {
 	
 	public TextItem(BinaryReader reader, ItemType itemType, ItemName itemName) throws Exception {
 		super(reader, itemType, itemName);
-		System.out.print(Integer.toHexString(reader.position())+"    ");
+//		System.out.print(Integer.toHexString(reader.position())+"    ");
 		
 		opt = reader.readInt32();
 		ff = reader.get();
@@ -41,15 +41,9 @@ public class TextItem extends Item<String> {
 			for(int i=0; i<numRows; i++) {
 				rows.add(new TextRow(reader, i==0));
 			}
-			
-			System.out.println();
-			return;
 		} else if(opt == 2) {
 			value = reader.readString();
-			System.out.println(value);
-		} else {
-			System.out.println();
-			return;
+//			System.out.println(value);
 		}
 	}
 
@@ -111,11 +105,10 @@ public class TextItem extends Item<String> {
 				i = reader.readInt32();
 			}
 			value = reader.readString();
-			System.out.print("    "+value);
+//			System.out.print("    "+value);
 		}
 		
 		public void toByteArrayOutputStream(ByteArrayOutputStream os) {
-			System.out.println(Integer.toHexString(os.size()));
 			BinaryWriter.string(os, rowId);
 			BinaryWriter.int8(os, b);
 			BinaryWriter.int32(os, opt);

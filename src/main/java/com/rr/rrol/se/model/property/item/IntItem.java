@@ -24,5 +24,9 @@ public class IntItem extends Item<Integer> {
 	public void toByteArrayOutputStream(ByteArrayOutputStream os) {
 		BinaryWriter.int32(os, value);
 	}
+
+	public void setValue(Integer value) {
+		this.value = value;
+	}
 	
 }

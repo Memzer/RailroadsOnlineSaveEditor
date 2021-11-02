@@ -22,7 +22,7 @@ public class CustomFormatData {
 	}
     
     public void toByteArrayOutputStream(ByteArrayOutputStream os) throws IOException {
-    	BinaryWriter.int32(os, count);
+    	BinaryWriter.int32(os, entries.size());
     	for(CustomFormatDataEntry entry : entries) {
     		entry.toByteArrayOutputStream(os);
     	}

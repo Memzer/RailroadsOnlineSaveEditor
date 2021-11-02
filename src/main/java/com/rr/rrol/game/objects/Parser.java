@@ -70,29 +70,6 @@ public class Parser {
 		
 		return splines;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Player> getPlayers() throws Exception {
-		ArrayProperty<String> names = getArrayProperty(PropertyName.PlayerNameArray);
-		ArrayProperty<Point3D> locations = getArrayProperty(PropertyName.PlayerLocationArray);
-		ArrayProperty<Float> money = getArrayProperty(PropertyName.PlayerMoneyArray);
-		ArrayProperty<Float> rotation = getArrayProperty(PropertyName.PlayerRotationArray);
-		ArrayProperty<Integer> xps = getArrayProperty(PropertyName.PlayerXPArray);
-		
-		List<Player> players = new ArrayList<>();
-		
-		for(int i=0; i<names.getValue().size(); i++) {
-			String name = names.getValue().get(i);
-			Point3D location = locations.getValue().get(i);
-			Float m = money.getValue().get(i);
-			Float r = rotation.getValue().get(i);
-			Integer xp = xps.getValue().get(i);
-			Player p = new Player(name, m, xp, location, r);
-			players.add(p);
-		}
-		
-		return players;
-	}
 
 	@SuppressWarnings("rawtypes")
 	public ArrayProperty getArrayProperty(PropertyName propertyName) throws Exception {

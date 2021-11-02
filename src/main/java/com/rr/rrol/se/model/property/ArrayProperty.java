@@ -78,7 +78,6 @@ public class ArrayProperty<T> extends Property<List> {
 			}
 		}
 		if(itemType.equals(ItemType.TextProperty)) {
-			System.out.println(propertyName);
 			items = new ArrayList<>();
 			for(int i=0; i<count; i++) {
 				items.add(new TextItem(reader, null, null));
@@ -136,6 +135,10 @@ public class ArrayProperty<T> extends Property<List> {
 				item.toByteArrayOutputStream(os);
 			}			
 		}
+	}
+
+	public List<Item> getItems() {
+		return items;
 	}
 
 }

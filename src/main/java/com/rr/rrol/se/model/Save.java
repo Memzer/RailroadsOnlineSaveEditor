@@ -37,16 +37,11 @@ public class Save {
 		}
 		
 		saveGameVersion = reader.readInt32();
-		packageVersion = reader.readInt32();
-		
-		engineVersion = new EngineVersion(reader);
-		
-		customFormatVersion = reader.readInt32();
-		
-		customFormatData = new CustomFormatData(reader);
-		
-		saveGameType = reader.readString();
-		
+		packageVersion = reader.readInt32();		
+		engineVersion = new EngineVersion(reader);		
+		customFormatVersion = reader.readInt32();		
+		customFormatData = new CustomFormatData(reader);		
+		saveGameType = reader.readString();		
 		properties = new ArrayList<>();
 		Property property = PropertyFactory.read(reader);
 		while(property != null) {
@@ -56,8 +51,7 @@ public class Save {
 	}
 	
 	public ByteArrayOutputStream toByteArrayOutputStream() throws IOException {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		
+		ByteArrayOutputStream os = new ByteArrayOutputStream();		
 		os.writeBytes(header);
 		BinaryWriter.int32(os, saveGameVersion);
 		BinaryWriter.int32(os, packageVersion);
@@ -65,10 +59,9 @@ public class Save {
 		BinaryWriter.int32(os, customFormatVersion);
 		customFormatData.toByteArrayOutputStream(os);
 		BinaryWriter.string(os, saveGameType);
-		for(Property property : properties) {
+		for(@SuppressWarnings("rawtypes") Property property : properties) {
 			property.toByteArrayOutputStream(os);
-		}
-		
+		}		
 		return os;
 	}
 

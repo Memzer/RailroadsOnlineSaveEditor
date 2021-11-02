@@ -4,11 +4,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import com.rr.rrol.game.objects.Parser;
+import com.rr.rrol.game.objects.Player;
 import com.rr.rrol.game.render.Map;
 import com.rr.rrol.se.model.Save;
 import com.rr.rrol.se.model.property.PropertyName;
@@ -17,60 +20,42 @@ import com.rr.rrol.se.reader.BinaryReader;
 public class Experiment {
 
 	public static void main(String[] args) throws Exception {
-//		String filename ="C:\\Users\\robert\\Downloads\\slot1.sav";
+		String edited ="C:\\Users\\robert\\Downloads\\edited.sav";
+		String filename ="C:\\Users\\robert\\Downloads\\slot1.sav";
 //		String filename ="C:\\Users\\robert\\Downloads\\slot7_lottie.sav";
-		String filename ="C:\\Users\\robert\\Downloads\\slot1_avarus.sav";
+//		String filename ="C:\\Users\\robert\\Downloads\\slot1_avarus.sav";
 		InputStream fis = new FileInputStream(filename);		
 		BinaryReader reader = new BinaryReader(fis);
 		Save save = new Save(reader);
 		
 		byte[] fileContent = Files.readAllBytes(Paths.get(filename));
 		
+		System.out.println(Player.getPlayerNames(save));
+		
+		Player p = Player.getInstance(save, "Mr Bonkers");
+		p.setMoney(15000);
+		
 		ByteArrayOutputStream os = save.toByteArrayOutputStream();
 		os.flush();
+		
+		OutputStream fos = new FileOutputStream(edited);
+		os.writeTo(fos);
+		
 	    byte[] target = os.toByteArray();
 	    
-	    int errFrom = Integer.MAX_VALUE;
 	    for(int i=0; i<target.length; i++) {
-	    	if(target[i] != fileContent[i]) {
-	    		errFrom = i;
-	    		break;
-	    	}
-	    }
-	    
-
-//	    System.out.println("Hello \u001b[1;31mred\u001b[0m world!");
-//    	StringBuilder orig = new StringBuilder("ORIG ");
-//    	StringBuilder baos = new StringBuilder("BAOS ");
-//	    for(int i=0; i<target.length; i++) {
-//	    	if(i==errFrom) {
-//	    		System.out.print("\u001b[1;31m");
-//	    	}
-//		    orig.append(padToLength(2,Integer.toHexString(fileContent[i]))).append(" ");
-//		    baos.append(padToLength(2,Integer.toHexString(target[i]))).append(" ");
-//
-//		    if((i+1) % 16 == 0 || i == target.length-1) {
-//			    System.out.println(orig.toString());
-//			    System.out.println(baos.toString());
-//			    System.out.println();
-//			    orig = new StringBuilder("ORIG ");
-//			    baos = new StringBuilder("BAOS ");
-//		    }
-//	    }
-	    
-	    for(int i=0; i<target.length; i++) {
-	    	if(i==errFrom) {
+	    	if(fileContent[i] != target[i]) {
 	    		System.out.print("\u001b[1;31m");
 	    	}
 	    	if(i % 16 == 0) {
 	    		System.out.print(padToLength(8, Integer.toHexString(i))+"  ");
 	    	}
 	    	System.out.print(padToLength(2,Integer.toHexString(target[i]))+" ");
+	    	if(fileContent[i] != target[i]) {
+	    		System.out.print("\u001b[m");
+	    	}
 	    	if((i+1) % 16 == 0 || i == target.length-1) {	    		
 	    		System.out.println();
-	    		if(i>errFrom) {
-	    			break;
-	    		}
 	    	}
 	    }
 		

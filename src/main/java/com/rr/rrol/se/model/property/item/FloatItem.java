@@ -24,5 +24,9 @@ public class FloatItem extends Item<Float> {
 	public void toByteArrayOutputStream(ByteArrayOutputStream os) {
 		BinaryWriter.float32(os, value);
 	}
+
+	public void setValue(Float value) {
+		this.value = value;
+	}
 	
 }
