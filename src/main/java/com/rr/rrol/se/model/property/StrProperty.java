@@ -1,6 +1,9 @@
 package com.rr.rrol.se.model.property;
 
+import java.io.ByteArrayOutputStream;
+
 import com.rr.rrol.se.reader.BinaryReader;
+import com.rr.rrol.se.reader.BinaryWriter;
 
 public class StrProperty extends Property<String> {
 	
@@ -15,6 +18,15 @@ public class StrProperty extends Property<String> {
 	@Override
 	public String getValue() {
 		return value;
+	}
+
+	@Override
+	public void toByteArrayOutputStream(ByteArrayOutputStream os) {
+		BinaryWriter.string(os, propertyName.toString());
+		BinaryWriter.string(os, propertyType.toString());
+		BinaryWriter.int64(os, length);
+		os.write(0);
+		BinaryWriter.string(os, value);
 	}
 
 }

@@ -1,6 +1,10 @@
 package com.rr.rrol.se.model;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import com.rr.rrol.se.reader.BinaryReader;
+import com.rr.rrol.se.reader.BinaryWriter;
 
 public class EngineVersion {
 
@@ -16,6 +20,14 @@ public class EngineVersion {
 		patch = reader.readInt16();
 		build = reader.readInt32();
 		buildId = reader.readString();
+    }
+    
+    public void toByteArrayOutputStream(ByteArrayOutputStream os) throws IOException {
+    	BinaryWriter.int16(os, major);
+    	BinaryWriter.int16(os, minor);
+    	BinaryWriter.int16(os, patch);
+    	BinaryWriter.int32(os, build);
+    	BinaryWriter.string(os, buildId);
     }
 
 	public short getMajor() {

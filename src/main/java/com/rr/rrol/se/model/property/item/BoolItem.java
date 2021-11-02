@@ -1,5 +1,7 @@
 package com.rr.rrol.se.model.property.item;
 
+import java.io.ByteArrayOutputStream;
+
 import com.rr.rrol.se.reader.BinaryReader;
 
 public class BoolItem extends Item<Boolean> {
@@ -20,6 +22,11 @@ public class BoolItem extends Item<Boolean> {
 	@Override
 	public Boolean getValue() {
 		return value;
+	}
+
+	@Override
+	public void toByteArrayOutputStream(ByteArrayOutputStream os) {
+		os.write(value.booleanValue()?1:0);
 	}
 	
 }

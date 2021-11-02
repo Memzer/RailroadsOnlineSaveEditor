@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.UUID;
+
+import com.rr.rrol.se.model.Guid;
 
 public class BinaryReader {
 
@@ -33,7 +36,6 @@ public class BinaryReader {
 		    }
 		    bb.flip();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -51,10 +53,8 @@ public class BinaryReader {
 	        inChannel.close();
 	        aFile.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}
@@ -112,34 +112,8 @@ public class BinaryReader {
 			return s.substring(0, s.length()-2);
 		}
 	}
-	public String uuid() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(padToLength(8, Integer.toHexString(readInt32())));
-		sb.append("-");
-		sb.append(padToLength(4, Integer.toHexString(readInt16())));
-		sb.append("-");
-		sb.append(padToLength(4, Integer.toHexString(readInt16())));
-		sb.append("-");
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append("-");
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-		sb.append(padToLength(2, Integer.toHexString(readInt8())));
-	
-		return sb.toString();
-	}
-	
-	private String padToLength(int length, String hex) {
-		while(hex.length() < length) {
-			hex = "0"+hex;
-		}
-		while(hex.length() > length) {
-			hex = hex.substring(1);
-		}
-		return hex;
+	public Guid uuid() {
+		Guid guid = new Guid(readInt32(),readInt16(),readInt16(),readInt8(),readInt8(),readInt8(),readInt8(),readInt8(),readInt8(),readInt8(),readInt8());		
+		return guid;
 	}
 }

@@ -1,6 +1,9 @@
 package com.rr.rrol.se.model.property.item;
 
+import java.io.ByteArrayOutputStream;
+
 import com.rr.rrol.se.reader.BinaryReader;
+import com.rr.rrol.se.reader.BinaryWriter;
 
 public class StructItem extends Item<Point3D> {
 
@@ -15,6 +18,13 @@ public class StructItem extends Item<Point3D> {
 	@Override
 	public Point3D getValue() {
 		return value;
+	}
+
+	@Override
+	public void toByteArrayOutputStream(ByteArrayOutputStream os) {
+		BinaryWriter.float32(os, (float)value.getX());
+		BinaryWriter.float32(os, (float)value.getY());
+		BinaryWriter.float32(os, (float)value.getZ());
 	}
 	
 }
