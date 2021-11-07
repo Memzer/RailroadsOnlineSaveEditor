@@ -1,7 +1,5 @@
 package com.rr.rrol.game.render;
 
-import static java.util.stream.Collectors.toList;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -14,10 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
-import com.rr.rrol.game.objects.Parser;
 import com.rr.rrol.game.objects.Spline;
 import com.rr.rrol.game.objects.SplineSegment;
 import com.rr.rrol.game.objects.Switch;
@@ -27,7 +25,7 @@ import com.rr.rrol.game.objects.enums.SwitchType;
 import com.rr.rrol.se.model.Save;
 import com.rr.rrol.se.model.property.item.Point3D;
 
-public class Map {
+public class MapRenderer {
 
 	private static final int MAP_HEIGHT = 194000;
     private static final int MAP_WIDTH = 203404;
@@ -40,10 +38,8 @@ public class Map {
     private double mapBgrScale = 3;
     
     public BufferedImage getImage(Save save) throws Exception {
-    	Parser p = new Parser(save);
-    	
     	String mapBgr = "mapBgr.jpg";
-    	InputStream in = Map.class.getResourceAsStream(mapBgr);
+    	InputStream in = MapRenderer.class.getResourceAsStream(mapBgr);
     	File file = new File(mapBgr);
     	file.getCanonicalFile();
         BufferedImage i = ImageIO.read(in);
@@ -59,7 +55,7 @@ public class Map {
         
         g.drawImage(i, 0, 0, null);
         
-        init(g, p);
+        init(g, save);
         
         return image;
     }
@@ -68,9 +64,9 @@ public class Map {
     	ImageIO.write(image, "png", file);
     }
     
-    private void init(Graphics2D g, Parser p) throws Exception {
-    	initSplines(g, p);
-    	initSwitches(g, p);
+    private void init(Graphics2D g, Save save) throws Exception {
+    	initSplines(g, save);
+    	initSwitches(g, save);
 //    	initWaterTowers(g, properties);
 //    	initFirewood(g, properties);
 //    	initVehicles(g, properties);
@@ -101,11 +97,11 @@ public class Map {
 //    	}
 //    }
 //    
-    private void initSwitches(Graphics2D g, Parser p) throws Exception {
+    private void initSwitches(Graphics2D g, Save save) throws Exception {
     	g.setStroke(new BasicStroke(1));
     	double len = 3;
     	
-    	List<Switch> switches = p.getSwitches();
+    	List<Switch> switches = save.getSwitches();
     	for(Switch s : switches) {
     		Point2D start = translateXY(s.getLocation());
     		double a = Math.toRadians(s.getRotation().getY());
@@ -172,14 +168,14 @@ public class Map {
 //    	List<Industry> industries = properties.industries.stream().filter(x -> x.type != IndustryType.industry_firewooddepot).collect(toList());    	
 //    }
     
-    private void initSplines(Graphics2D g, Parser p) throws Exception {
-    	List<Spline> allSplines = p.getSplines();
-    	List<Spline> rails = allSplines.stream().filter(x -> x.getType() == SplineType.RailNG).collect(toList());
-    	List<Spline> trestle = allSplines.stream().filter(x -> x.getType() == SplineType.TrestleDeck).collect(toList());
-    	List<Spline> groundwork = allSplines.stream().filter(x -> x.getType() == SplineType.Grade || x.getType() == SplineType.GradeConstant).collect(toList());
-    	List<Spline> stone = allSplines.stream().filter(x -> x.getType() == SplineType.StonewallVariable || x.getType() == SplineType.StonewallConstant).collect(toList());
-    	List<Spline> bridge = allSplines.stream().filter(x -> x.getType() == SplineType.Trestle).collect(toList());
-    	List<Spline> bridgeSteel = allSplines.stream().filter(x -> x.getType() == SplineType.SplineTrestleSteel).collect(toList());
+    private void initSplines(Graphics2D g, Save save) throws Exception {
+    	List<Spline> allSplines = save.getSplines();
+    	List<Spline> rails = allSplines.stream().filter(x -> x.getType() == SplineType.RailNG).collect(Collectors.toList());
+    	List<Spline> trestle = allSplines.stream().filter(x -> x.getType() == SplineType.TrestleDeck).collect(Collectors.toList());
+    	List<Spline> groundwork = allSplines.stream().filter(x -> x.getType() == SplineType.Grade || x.getType() == SplineType.GradeConstant).collect(Collectors.toList());
+    	List<Spline> stone = allSplines.stream().filter(x -> x.getType() == SplineType.StonewallVariable || x.getType() == SplineType.StonewallConstant).collect(Collectors.toList());
+    	List<Spline> bridge = allSplines.stream().filter(x -> x.getType() == SplineType.Trestle).collect(Collectors.toList());
+    	List<Spline> bridgeSteel = allSplines.stream().filter(x -> x.getType() == SplineType.SplineTrestleSteel).collect(Collectors.toList());
     	
     	drawSpline(g, groundwork, 3, Color.ORANGE.darker());
     	drawSpline(g, stone, 3, Color.GRAY);

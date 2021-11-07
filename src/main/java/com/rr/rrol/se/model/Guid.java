@@ -28,6 +28,10 @@ public class Guid {
 		this.b7 = b7;
 		this.b8 = b8;
 	}
+	
+	public static Guid empty() {
+		return new Guid(0,(short)0,(short)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0);
+	}
 
 	@Override
 	public String toString() {

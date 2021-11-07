@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rr.rrol.se.reader.BinaryReader;
-import com.rr.rrol.se.reader.BinaryWriter;
+import com.rr.rrol.se.io.BinaryReader;
+import com.rr.rrol.se.io.BinaryWriter;
 
 public class CustomFormatData {
 

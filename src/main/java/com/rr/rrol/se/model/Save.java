@@ -1,68 +1,43 @@
 package com.rr.rrol.se.model;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rr.rrol.game.objects.Player;
+import com.rr.rrol.game.objects.Spline;
+import com.rr.rrol.game.objects.Switch;
+import com.rr.rrol.game.objects.Vehicle;
 import com.rr.rrol.se.model.property.Property;
-import com.rr.rrol.se.model.property.PropertyFactory;
-import com.rr.rrol.se.reader.BinaryReader;
-import com.rr.rrol.se.reader.BinaryWriter;
 
 public class Save {
 
 	public static byte[] header = "GVAS".getBytes();
 	
 	private int saveGameVersion;
-	private int packageVersion;
-	
-	private EngineVersion engineVersion;
-	
+	private int packageVersion;	
+	private short major;
+	private short minor;
+	private short patch;
+	private int build;
+	private String buildId;
 	private int customFormatVersion;
-	private CustomFormatData customFormatData;
-	
-	private String saveGameType;
-	
+	private int customFormatCount;
+	private List<CustomFormatDataEntry> customFormatData;
+	private String saveGameType;	
 	@SuppressWarnings("rawtypes")
+	
+	@Deprecated
 	private List<Property> properties;
-
-	@SuppressWarnings("rawtypes")
-	public Save(BinaryReader reader) throws Exception {
-		byte[] checkHeader = new byte[Save.header.length];
-		reader.get(checkHeader);
-		
-		if(!new String(Save.header).equals(new String(checkHeader))) {
-			throw new Exception("Invalid header, expected "+new String(Save.header));
-		}
-		
-		saveGameVersion = reader.readInt32();
-		packageVersion = reader.readInt32();		
-		engineVersion = new EngineVersion(reader);		
-		customFormatVersion = reader.readInt32();		
-		customFormatData = new CustomFormatData(reader);		
-		saveGameType = reader.readString();		
-		properties = new ArrayList<>();
-		Property property = PropertyFactory.read(reader);
-		while(property != null) {
-			properties.add(property);
-			property = PropertyFactory.read(reader);
-		}
-	}
 	
-	public ByteArrayOutputStream toByteArrayOutputStream() throws IOException {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();		
-		os.writeBytes(header);
-		BinaryWriter.int32(os, saveGameVersion);
-		BinaryWriter.int32(os, packageVersion);
-		engineVersion.toByteArrayOutputStream(os);
-		BinaryWriter.int32(os, customFormatVersion);
-		customFormatData.toByteArrayOutputStream(os);
-		BinaryWriter.string(os, saveGameType);
-		for(@SuppressWarnings("rawtypes") Property property : properties) {
-			property.toByteArrayOutputStream(os);
-		}		
-		return os;
+	private String saveGameDate;	
+	private List<Player> players;
+	private List<Spline> splines;
+	private List<Switch> switches;
+	
+	private List<Vehicle> vehicles;
+
+	public Save() {
+		customFormatData = new ArrayList<>();
 	}
 
 	public int getSaveGameVersion() {
@@ -73,25 +48,138 @@ public class Save {
 		return packageVersion;
 	}
 
-	public EngineVersion getEngineVersion() {
-		return engineVersion;
-	}
-
 	public int getCustomFormatVersion() {
 		return customFormatVersion;
-	}
-
-	public CustomFormatData getCustomFormatData() {
-		return customFormatData;
 	}
 
 	public String getSaveGameType() {
 		return saveGameType;
 	}
 
-	@SuppressWarnings("rawtypes")
+	public void setSaveGameVersion(int saveGameVersion) {
+		this.saveGameVersion = saveGameVersion;
+	}
+
+	public void setPackageVersion(int packageVersion) {
+		this.packageVersion = packageVersion;
+	}
+
+	public void setCustomFormatVersion(int customFormatVersion) {
+		this.customFormatVersion = customFormatVersion;
+	}
+
+	public void setSaveGameType(String saveGameType) {
+		this.saveGameType = saveGameType;
+	}
+
+	public short getMajor() {
+		return major;
+	}
+
+	public void setMajor(short major) {
+		this.major = major;
+	}
+
+	public short getMinor() {
+		return minor;
+	}
+
+	public void setMinor(short minor) {
+		this.minor = minor;
+	}
+
+	public short getPatch() {
+		return patch;
+	}
+
+	public void setPatch(short patch) {
+		this.patch = patch;
+	}
+
+	public int getBuild() {
+		return build;
+	}
+
+	public void setBuild(int build) {
+		this.build = build;
+	}
+
+	public String getBuildId() {
+		return buildId;
+	}
+
+	public void setBuildId(String buildId) {
+		this.buildId = buildId;
+	}
+
+	public void setCustomFormatData(List<CustomFormatDataEntry> customFormatData) {
+		this.customFormatData = customFormatData;
+	}
+
+	public int getCustomFormatCount() {
+		return customFormatCount;
+	}
+
+	public void setCustomFormatCount(int customFormatCount) {
+		this.customFormatCount = customFormatCount;
+	}
+
+	public List<CustomFormatDataEntry> getCustomFormatData() {
+		return customFormatData;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
+	public String getSaveGameDate() {
+		return saveGameDate;
+	}
+
+	public void setSaveGameDate(String saveGameDate) {
+		this.saveGameDate = saveGameDate;
+	}
+
+	public static byte[] getHeader() {
+		return header;
+	}
+
+	@Deprecated
 	public List<Property> getProperties() {
 		return properties;
+	}
+
+	@Deprecated
+	public void setProperties(List<Property> properties) {
+		this.properties = properties;
+	}
+
+	public List<Spline> getSplines() {
+		return splines;
+	}
+
+	public void setSplines(List<Spline> splines) {
+		this.splines = splines;
+	}
+
+	public List<Switch> getSwitches() {
+		return switches;
+	}
+
+	public void setSwitches(List<Switch> switches) {
+		this.switches = switches;
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
+
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
 	
 }

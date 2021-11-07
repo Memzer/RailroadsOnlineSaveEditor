@@ -13,7 +13,15 @@ public class Spline {
     
     private List<SplineSegment> segments;
     
-	public Spline(Point3D location, SplineType type, Integer controlPointIndexStart, Integer controlPointIndexEnd, Integer visibilityIndexStart, Integer visibilityIndexEnd, ArrayProperty<Point3D> controlPoints, ArrayProperty<Boolean> segmentsVisibility, int index) throws Exception {
+    public Spline(Point3D location, SplineType type) {
+		super();
+		this.type = type;
+    	segments = new ArrayList<>();
+    }
+    
+	public Spline(Point3D location, SplineType type, Integer controlPointIndexStart, Integer controlPointIndexEnd, 
+			Integer visibilityIndexStart, Integer visibilityIndexEnd, ArrayProperty<Point3D> controlPoints, 
+			ArrayProperty<Boolean> segmentsVisibility, int index) throws Exception {
 		super();
 		this.type = type;
 		
@@ -38,7 +46,9 @@ public class Spline {
         
         segments = new ArrayList<>();
         for(int i=controlPointIndexStart; i<controlPointIndexEnd; i++) {
-        	segments.add(new SplineSegment((Point3D)controlPoints.getValue().get(i),(Point3D)controlPoints.getValue().get(i+1),((Boolean)segmentsVisibility.getValue().get(i-index))));
+        	segments.add(new SplineSegment((Point3D)controlPoints.getValue().get(i),
+        			(Point3D)controlPoints.getValue().get(i+1),
+        			((Boolean)segmentsVisibility.getValue().get(i-index))));
         }
 	}
 
@@ -49,7 +59,5 @@ public class Spline {
 	public List<SplineSegment> getSegments() {
 		return segments;
 	}
-    
-    
     
 }

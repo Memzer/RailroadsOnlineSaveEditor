@@ -1,8 +1,8 @@
 package com.rr.rrol.se.model.property;
 
+import com.rr.rrol.se.io.BinaryReader;
 import com.rr.rrol.se.model.property.item.ItemType;
 import com.rr.rrol.se.model.property.item.Point3D;
-import com.rr.rrol.se.reader.BinaryReader;
 
 public class PropertyFactory {
 

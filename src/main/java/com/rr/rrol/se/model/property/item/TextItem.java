@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.rr.rrol.se.reader.BinaryReader;
-import com.rr.rrol.se.reader.BinaryWriter;
+import com.rr.rrol.se.io.BinaryReader;
+import com.rr.rrol.se.io.BinaryWriter;
 
 public class TextItem extends Item<String> {
 
@@ -72,7 +72,7 @@ public class TextItem extends Item<String> {
 		if(value != null) {
 			return value;
 		}
-		if(rows.size() > 0) {
+		if(rows != null && rows.size() > 0) {
 			StringBuilder sb = new StringBuilder();
 			Iterator<TextRow> i = rows.iterator();
 			while(i.hasNext()) {

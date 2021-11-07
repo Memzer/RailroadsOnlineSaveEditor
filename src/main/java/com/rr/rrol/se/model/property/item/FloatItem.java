@@ -2,8 +2,8 @@ package com.rr.rrol.se.model.property.item;
 
 import java.io.ByteArrayOutputStream;
 
-import com.rr.rrol.se.reader.BinaryReader;
-import com.rr.rrol.se.reader.BinaryWriter;
+import com.rr.rrol.se.io.BinaryReader;
+import com.rr.rrol.se.io.BinaryWriter;
 
 public class FloatItem extends Item<Float> {
 

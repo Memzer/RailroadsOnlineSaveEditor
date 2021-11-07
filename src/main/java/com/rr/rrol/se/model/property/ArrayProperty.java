@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.rr.rrol.se.io.BinaryReader;
+import com.rr.rrol.se.io.BinaryWriter;
 import com.rr.rrol.se.model.Guid;
 import com.rr.rrol.se.model.property.item.BoolItem;
 import com.rr.rrol.se.model.property.item.FloatItem;
@@ -17,8 +19,6 @@ import com.rr.rrol.se.model.property.item.Point3D;
 import com.rr.rrol.se.model.property.item.StrItem;
 import com.rr.rrol.se.model.property.item.StructItem;
 import com.rr.rrol.se.model.property.item.TextItem;
-import com.rr.rrol.se.reader.BinaryReader;
-import com.rr.rrol.se.reader.BinaryWriter;
 
 @SuppressWarnings("rawtypes")
 public class ArrayProperty<T> extends Property<List> {
@@ -139,6 +139,11 @@ public class ArrayProperty<T> extends Property<List> {
 
 	public List<Item> getItems() {
 		return items;
+	}
+
+	@Override
+	public String toString() {
+		return "ArrayProperty:"+propertyName.name();
 	}
 
 }

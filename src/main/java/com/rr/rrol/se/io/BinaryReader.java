@@ -1,4 +1,4 @@
-package com.rr.rrol.se.reader;
+package com.rr.rrol.se.io;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -3,13 +3,15 @@ package com.rr.rrol.se.model;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import com.rr.rrol.se.reader.BinaryReader;
-import com.rr.rrol.se.reader.BinaryWriter;
+import com.rr.rrol.se.io.BinaryReader;
+import com.rr.rrol.se.io.BinaryWriter;
 
 public class CustomFormatDataEntry {
 
-	public Guid guid;
-	public int value;
+	private Guid guid;
+	private int value;
+	
+	public CustomFormatDataEntry() {}
 	
 	public CustomFormatDataEntry(BinaryReader reader) {
 		guid = reader.uuid();
@@ -27,5 +29,13 @@ public class CustomFormatDataEntry {
 
 	public int getValue() {
 		return value;
+	}
+
+	public void setGuid(Guid guid) {
+		this.guid = guid;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
 	}
 }
