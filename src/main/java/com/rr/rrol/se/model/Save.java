@@ -3,11 +3,16 @@ package com.rr.rrol.se.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rr.rrol.game.objects.Industry;
 import com.rr.rrol.game.objects.Player;
+import com.rr.rrol.game.objects.Sandhouse;
 import com.rr.rrol.game.objects.Spline;
 import com.rr.rrol.game.objects.Switch;
+import com.rr.rrol.game.objects.Turntable;
 import com.rr.rrol.game.objects.Vehicle;
+import com.rr.rrol.game.objects.Watertower;
 import com.rr.rrol.se.model.property.Property;
+import com.rr.rrol.se.model.property.item.Point3D;
 
 public class Save {
 
@@ -33,8 +38,12 @@ public class Save {
 	private List<Player> players;
 	private List<Spline> splines;
 	private List<Switch> switches;
-	
+	private List<Turntable> turntables;
+	private List<Watertower> watertowers;
+	private List<Sandhouse> sandhouses;
+	private List<Industry> industries;
 	private List<Vehicle> vehicles;
+	private List<Point3D> removedVegetation;
 
 	public Save() {
 		customFormatData = new ArrayList<>();
@@ -180,6 +189,46 @@ public class Save {
 
 	public void setVehicles(List<Vehicle> vehicles) {
 		this.vehicles = vehicles;
+	}
+
+	public List<Turntable> getTurntables() {
+		return turntables;
+	}
+
+	public void setTurntables(List<Turntable> turntables) {
+		this.turntables = turntables;
+	}
+
+	public List<Watertower> getWatertowers() {
+		return watertowers;
+	}
+
+	public void setWatertowers(List<Watertower> watertowers) {
+		this.watertowers = watertowers;
+	}
+
+	public List<Sandhouse> getSandhouses() {
+		return sandhouses;
+	}
+
+	public void setSandhouses(List<Sandhouse> sandhouses) {
+		this.sandhouses = sandhouses;
+	}
+
+	public List<Industry> getIndustries() {
+		return industries;
+	}
+
+	public void setIndustries(List<Industry> industries) {
+		this.industries = industries;
+	}
+
+	public List<Point3D> getRemovedVegetation() {
+		return removedVegetation;
+	}
+
+	public void setRemovedVegetation(List<Point3D> removedVegetation) {
+		this.removedVegetation = removedVegetation;
 	}
 	
 }

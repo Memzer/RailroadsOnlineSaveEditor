@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.UUID;
 
 import com.rr.rrol.se.model.Guid;
 
@@ -110,6 +109,26 @@ public class BinaryReader {
 			bb.get(valueBytes);
 			String s = new String(valueBytes);
 			return s.substring(0, s.length()-2);
+		}
+	}
+	public StringWrapper readStringWrapper() {
+		int length = readInt32();
+		if(length == 0) {
+			return new StringWrapper(length, null);
+		}
+		if(length == 1 || length == -1) {
+			return new StringWrapper(length, "");
+		}
+		byte[] valueBytes = new byte[length>0?length:-2*length];
+		
+		if(length > 0) {
+			bb.get(valueBytes);
+			String s = new String(valueBytes);
+			return new StringWrapper(length, s.substring(0, s.length()-1));
+		} else {
+			bb.get(valueBytes);
+			String s = new String(valueBytes);
+			return new StringWrapper(length, s.substring(0, s.length()-2));
 		}
 	}
 	public Guid uuid() {

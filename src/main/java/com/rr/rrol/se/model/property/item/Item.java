@@ -1,7 +1,5 @@
 package com.rr.rrol.se.model.property.item;
 
-import java.io.ByteArrayOutputStream;
-
 import com.rr.rrol.se.io.BinaryReader;
 
 public abstract class Item<T> {
@@ -15,7 +13,5 @@ public abstract class Item<T> {
 	}
 	
 	public abstract T getValue();
-	
-	public abstract void toByteArrayOutputStream(ByteArrayOutputStream os);
 	
 }

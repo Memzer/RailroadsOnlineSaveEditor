@@ -1,7 +1,6 @@
 package com.rr.rrol.se.io;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -46,6 +45,17 @@ public class BinaryWriter {
 		bb.putInt(length+(s==null?0:1));
 		if(s != null) {
 			bb.put(s.getBytes());
+		}
+		os.writeBytes(bb.array());
+	}
+	
+	public static void stringWrapper(ByteArrayOutputStream os, StringWrapper s) {
+		int length = s.getString()==null?0:s.getLength();
+		ByteBuffer bb = ByteBuffer.allocate(length>0?4+length:4+(-2*length));
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		bb.putInt(length);
+		if(s != null) {
+			bb.put(s.getString().getBytes());
 		}
 		os.writeBytes(bb.array());
 	}

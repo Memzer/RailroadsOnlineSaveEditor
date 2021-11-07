@@ -5,13 +5,15 @@ import com.rr.rrol.se.model.property.item.Point3D;
 public class Player extends GameObject {
 
 	private String name;
+	private int nameLength;
 	private Point3D location;
 	private float r,money;
 	private int xp;
 	
-	public Player(String name, Point3D location, float r, float money, int xp) {
+	public Player(String name, int nameLength, Point3D location, float r, float money, int xp) {
 		super();
 		this.name = name;
+		this.nameLength = nameLength;
 		this.location = location;
 		this.r = r;
 		this.money = money;
@@ -56,6 +58,10 @@ public class Player extends GameObject {
 
 	public void setXp(int xp) {
 		this.xp = xp;
+	}
+
+	public int getNameLength() {
+		return nameLength;
 	}
 	
 }

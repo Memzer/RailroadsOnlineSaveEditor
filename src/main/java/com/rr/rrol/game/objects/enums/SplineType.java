@@ -1,6 +1,6 @@
 package com.rr.rrol.game.objects.enums;
 
-public enum SplineType {
+public enum SplineType implements IEnum {
 
 	RailNG,
     Grade,
@@ -9,6 +9,16 @@ public enum SplineType {
     TrestleDeck,
     StonewallVariable,
     StonewallConstant,
-    SplineTrestleSteel
+    SplineTrestleSteel;
+
+	@Override
+    public Integer getIndex() {
+		for(int i=0; i<values().length; i++) {
+			if(values()[i].equals(this)) {
+				return i;
+			}
+		}
+		return null;
+	}
     
 }

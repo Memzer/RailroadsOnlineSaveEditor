@@ -1,12 +1,10 @@
 package com.rr.rrol.se.model.property.item;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.rr.rrol.se.io.BinaryReader;
-import com.rr.rrol.se.io.BinaryWriter;
 
 public class TextItem extends Item<String> {
 
@@ -15,7 +13,7 @@ public class TextItem extends Item<String> {
 	private byte ff;
 	private int i1;
 	
-	private Integer l2;
+	private Integer i2;
 	private Byte term;
 	private String hash;
 	private String format;
@@ -31,7 +29,7 @@ public class TextItem extends Item<String> {
 		i1 = reader.readInt32();
 		
 		if(opt == 1) {
-			l2 = reader.readInt32();
+			i2 = reader.readInt32();
 			term = reader.get();
 			hash = reader.readString();
 			format = reader.readString();
@@ -44,26 +42,6 @@ public class TextItem extends Item<String> {
 		} else if(opt == 2) {
 			value = reader.readString();
 //			System.out.println(value);
-		}
-	}
-
-	@Override
-	public void toByteArrayOutputStream(ByteArrayOutputStream os) {
-		BinaryWriter.int32(os, opt);
-		BinaryWriter.int8(os, ff);
-		BinaryWriter.int32(os, i1);
-		if(opt == 2 && value != null) {
-			BinaryWriter.string(os, value);
-		}
-		if(opt == 1) {
-			BinaryWriter.int32(os, l2);
-			BinaryWriter.int8(os, term);
-			BinaryWriter.string(os, hash);
-			BinaryWriter.string(os, format);
-			BinaryWriter.int32(os, rows.size());
-			for(TextRow row : rows) {
-				row.toByteArrayOutputStream(os);
-			}
 		}
 	}
 
@@ -87,7 +65,7 @@ public class TextItem extends Item<String> {
 		return null;
 	}
 	
-	class TextRow {
+	public class TextRow {
 		private String rowId;
 		private byte b;
 		private int opt;
@@ -106,17 +84,6 @@ public class TextItem extends Item<String> {
 			}
 			value = reader.readString();
 //			System.out.print("    "+value);
-		}
-		
-		public void toByteArrayOutputStream(ByteArrayOutputStream os) {
-			BinaryWriter.string(os, rowId);
-			BinaryWriter.int8(os, b);
-			BinaryWriter.int32(os, opt);
-			BinaryWriter.int8(os, ff);
-			if(i != null) {
-				BinaryWriter.int32(os, i);
-			}
-			BinaryWriter.string(os, value);
 		}
 
 		public String getRowId() {
@@ -142,5 +109,73 @@ public class TextItem extends Item<String> {
 		public String getValue() {
 			return value;
 		}
+	}
+
+	public int getOpt() {
+		return opt;
+	}
+
+	public void setOpt(int opt) {
+		this.opt = opt;
+	}
+
+	public byte getFf() {
+		return ff;
+	}
+
+	public void setFf(byte ff) {
+		this.ff = ff;
+	}
+
+	public int getI1() {
+		return i1;
+	}
+
+	public void setI1(int i1) {
+		this.i1 = i1;
+	}
+
+	public Integer getI2() {
+		return i2;
+	}
+
+	public void setI2(Integer l2) {
+		this.i2 = l2;
+	}
+
+	public Byte getTerm() {
+		return term;
+	}
+
+	public void setTerm(Byte term) {
+		this.term = term;
+	}
+
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+	public List<TextRow> getRows() {
+		return rows;
+	}
+
+	public void setRows(List<TextRow> rows) {
+		this.rows = rows;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

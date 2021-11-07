@@ -1,13 +1,5 @@
 package com.rr.rrol.game.objects;
 
-import java.util.Optional;
-
-import com.rr.rrol.se.model.Save;
-import com.rr.rrol.se.model.property.ArrayProperty;
-import com.rr.rrol.se.model.property.Property;
-import com.rr.rrol.se.model.property.PropertyName;
-import com.rr.rrol.se.model.property.StrProperty;
-
 public abstract class GameObject {
 
 //	@SuppressWarnings("rawtypes")
