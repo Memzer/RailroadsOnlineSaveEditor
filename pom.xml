@@ -5,7 +5,7 @@
 
 	<groupId>RailroadsOnlineSaveEditor</groupId>
 	<artifactId>RailroadsOnlineSaveEditor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
