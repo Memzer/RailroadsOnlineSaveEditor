@@ -317,15 +317,14 @@ public class SaveWriter {
 					BinaryWriter.string(os, item.getFormat());					
 					BinaryWriter.int32(os, item.getRows().size());
 					
-					boolean first = true;
 					for(TextItem.TextRow row : item.getRows()) {
+//						System.out.println(Integer.toHexString(os.size()));
 						BinaryWriter.string(os, row.getRowId());
 						BinaryWriter.int8(os, row.getB());
 						BinaryWriter.int32(os, row.getOpt());
 						BinaryWriter.int8(os, row.getFf());
-						if(first) {
+						if(row.getValue() != null) {
 							BinaryWriter.int32(os, row.getI());
-							first = false;
 						}
 						BinaryWriter.string(os, row.getValue());
 					}
@@ -334,8 +333,6 @@ public class SaveWriter {
 				}
 			}
 		}
-		
-		System.out.println();
 	}
 	
 	private static void writeArrayStruct(ByteArrayOutputStream os, PropertyName pName, ItemSubType iType, List<Object> data) throws Exception {

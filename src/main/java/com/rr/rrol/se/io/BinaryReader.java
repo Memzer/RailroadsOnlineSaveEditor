@@ -67,6 +67,10 @@ public class BinaryReader {
 	public int position() {
 		return bb.position();
 	}
+	public void seek(int s) {
+		int p = position()+s;
+		bb.position(p);
+	}
 	public int remaining() {
 		return bb.remaining();
 	}
@@ -92,6 +96,7 @@ public class BinaryReader {
 		return Float.intBitsToFloat((bb.get() & 0xFF) ^ (bb.get() & 0xFF) << 8 ^ (bb.get() & 0xFF) << 16 ^ (bb.get() & 0xFF) << 24);
 	}
 	public String readString() {
+//		System.out.println(Integer.toHexString(bb.position()));
 		int length = readInt32();
 		if(length == 0) {
 			return null;

@@ -22,7 +22,7 @@ public class TextItem extends Item<String> {
 	
 	public TextItem(BinaryReader reader, ItemType itemType, ItemName itemName) throws Exception {
 		super(reader, itemType, itemName);
-//		System.out.print(Integer.toHexString(reader.position())+"    ");
+//		System.out.println(Integer.toHexString(reader.position()));
 		
 		opt = reader.readInt32();
 		ff = reader.get();
@@ -39,6 +39,7 @@ public class TextItem extends Item<String> {
 			for(int i=0; i<numRows; i++) {
 				rows.add(new TextRow(reader, i==0));
 			}
+//			System.out.println(getValue());
 		} else if(opt == 2) {
 			value = reader.readString();
 //			System.out.println(value);
@@ -74,13 +75,15 @@ public class TextItem extends Item<String> {
 		private String value;
 		
 		public TextRow(BinaryReader reader, boolean first) {
+//			System.out.println(Integer.toHexString(reader.position()));
 			rowId = reader.readString();
 			b = reader.get();//Expect always == 4;
 			
 			opt = reader.readInt32();//Expect always == 2
 			ff = reader.get();//Expect always == FF (-1)
-			if(first) {
-				i = reader.readInt32();
+			i = reader.readInt32();
+			if(i == 0) {
+				reader.seek(-4);
 			}
 			value = reader.readString();
 //			System.out.print("    "+value);

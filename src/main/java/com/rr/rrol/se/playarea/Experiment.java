@@ -17,7 +17,8 @@ public class Experiment {
 	public static void main(String[] args) throws Exception {
 //		String filename ="C:\\Users\\robert\\Downloads\\slot1.sav";
 //		String filename ="C:\\Users\\robert\\Downloads\\slot7_lottie.sav";
-		String filename ="C:\\Users\\robert\\Downloads\\slot1_avarus.sav";
+//		String filename ="C:\\Users\\robert\\Downloads\\slot1_avarus.sav";
+		String filename ="C:\\Users\\robert\\Downloads\\slot1_TJ.sav";
 		InputStream fis = new FileInputStream(filename);
 		
 		Save save = SaveReader.read(fis);
